@@ -12,7 +12,7 @@ namespace ProcessNote.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        ObservableCollection<Proc> Processes { get; set; } = new ObservableCollection<Proc>();
+        internal ObservableCollection<Proc> Processes { get; set; } = new ObservableCollection<Proc>();
         Proc SelectedProcess { get; set; }
 
         public MainWindowViewModel() 

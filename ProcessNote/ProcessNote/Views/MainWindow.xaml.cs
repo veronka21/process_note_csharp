@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,6 +29,7 @@ namespace ProcessNote
             InitializeComponent();
             _vm = new MainWindowViewModel();
             this.DataContext = _vm;
+            lvProc.ItemsSource = _vm.Processes;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

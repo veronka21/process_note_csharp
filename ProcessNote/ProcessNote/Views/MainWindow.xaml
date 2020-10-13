@@ -7,13 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <ListView ItemsSource="{Binding Processes}">
+        <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding ProcessName}" />
+                    <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding processId}" />
                 </GridView>
             </ListView.View>
         </ListView>
+
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
