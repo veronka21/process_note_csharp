@@ -25,7 +25,13 @@ namespace ProcessNote.ViewModels
             Process[] processCollection = Process.GetProcesses();
             foreach (Process p in processCollection)
             {
-                Processes.Add(new Proc() {ProcessName = p.ProcessName, ProcessID = p.Id });
+                Proc currentProcess = new Proc() { ProcessName = p.ProcessName, ProcessID = p.Id, Threads = p.Threads };
+                try {
+                    currentProcess.StartTime = p.StartTime;
+                } catch (Exception) {
+                    
+                }
+                Processes.Add(currentProcess);
             }
         }
     }

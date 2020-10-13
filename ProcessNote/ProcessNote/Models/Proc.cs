@@ -7,10 +7,16 @@ using System.Threading.Tasks;
 
 namespace ProcessNote.Models
 {
-    class Proc
-    {
+    class Proc {
         private string _processName;
         private int _processID;
+        public ProcessThreadCollection Threads { get; set; }
+        public DateTime? StartTime { get; set; }
+        public int? ThreadCount
+            {
+                get =>Threads.Count;
+            }
+        
 
         public string ProcessName
         {
