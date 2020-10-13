@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProcessNote.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,18 @@ namespace ProcessNote
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private readonly MainWindowViewModel _vm;
         public MainWindow()
         {
             InitializeComponent();
+            _vm = new MainWindowViewModel();
+            this.DataContext = _vm;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
