@@ -25,7 +25,7 @@ namespace ProcessNote.ViewModels
             Process[] processCollection = Process.GetProcesses();
             foreach (Process p in processCollection)
             {
-                Processes.Add(new Proc() {ProcessName = p.ProcessName });
+                Processes.Add(new Proc() {ProcessName = p.ProcessName, ProcessID = p.Id });
             }
         }
     }
