@@ -69,5 +69,16 @@ namespace ProcessNote
         {
             CollectionViewSource.GetDefaultView(lvProc.ItemsSource).Refresh();
         }
+
+        private void ListBox_SelectedProcessChange(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox lb = sender as ListBox;
+            _vm.SelectedProcessObservable.Clear();
+            foreach (Proc item in lb.SelectedItems)
+            {
+                _vm.SelectedProcessObservable.Add(item);
+                Console.WriteLine("asdasd");
+            }
+        }
     }
 }

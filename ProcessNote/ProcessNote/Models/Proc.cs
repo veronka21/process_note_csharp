@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProcessNote.Models
 {
-    class Proc {
+    public class Proc {
         private string _processName;
         private int _processID;
         public ProcessThreadCollection Threads { get; set; }

@@ -10,7 +10,8 @@
         <DockPanel Margin="10" >
             <TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="TxtFilter_TextChanged"/>
             <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}"
-                      SelectedItem="{Binding SelectedProcess}">
+                      SelectedItem="{Binding SelectedProcessObservable}"
+                      SelectionChanged="ListBox_SelectedProcessChange">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="200"   DisplayMemberBinding="{Binding ProcessID}">
@@ -27,11 +28,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <StackPanel HorizontalAlignment="Left"
+        <StackPanel 
+            HorizontalAlignment="Left"
                     Orientation="Horizontal" Margin="0,-0.2,0,0" Width="263">
             <TextBlock Text="Current Process:"
                        Margin="5" />
-            <TextBlock Text="{Binding SelectedProcess.ProcessName}"
+                <TextBlock Text="{Binding SelectedProcessObservable.ProcessName}"
                        Margin="5,0,5,-0.2" Width="160" />
         </StackPanel>
         </DockPanel>
