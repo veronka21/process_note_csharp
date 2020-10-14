@@ -53,6 +53,12 @@
                                                     <Run Text="Start time: "></Run>
                                                     <Run Text="{Binding StartTime}"></Run>
                                                 </TextBlock>
+                                            </StackPanel> 
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>
+                                                    <Run Text="Run time: "></Run>
+                                                    <Run Text="{Binding RunTimeString}"></Run>
+                                                </TextBlock>
                                             </StackPanel>
                                         </StackPanel>
                                     </DataTemplate>

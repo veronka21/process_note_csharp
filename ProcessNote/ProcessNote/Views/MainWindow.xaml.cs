@@ -77,6 +77,7 @@ namespace ProcessNote
             _vm.SelectedProcessObservable.Clear();
             foreach (Proc item in lb.SelectedItems)
             {
+                item.setRunTime();
                 _vm.SelectedProcessObservable.Add(item);
                 Console.WriteLine("asdasd");
             }
