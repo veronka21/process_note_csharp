@@ -12,6 +12,17 @@ namespace ProcessNote.Models
         private int _processID;
         public ProcessThreadCollection Threads { get; set; }
         public DateTime? StartTime { get; set; }
+        public PerformanceCounter CPU_Counter { get; set; }
+
+        public string showCurrentCpuUsage() 
+        {
+            try {
+                return $"CPU {CPU_Counter?.NextValue()}%";
+            } catch (Exception e) { 
+                return $"Not available: {e}";
+            }
+        }
+
         public int? ThreadCount
             {
                 get =>Threads.Count;

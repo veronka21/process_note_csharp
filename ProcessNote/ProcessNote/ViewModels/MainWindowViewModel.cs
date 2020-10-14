@@ -7,6 +7,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProcessNote.ViewModels
 {
@@ -29,10 +30,27 @@ namespace ProcessNote.ViewModels
                 try {
                     currentProcess.StartTime = p.StartTime;
                 } catch (Exception) {
-                    
                 }
+                //currentProcess.CPU_Counter = CPU(currentProcess.ProcessName, currentProcess.ProcessID);
                 Processes.Add(currentProcess);
+                //MessageBox.Show(currentProcess.showCurrentCpuUsage());
             }
+        }
+
+        private PerformanceCounter CPU(string processName, int processId) {
+            string name = string.Empty;
+            foreach (var instance in new PerformanceCounterCategory("Process").GetInstanceNames()) {
+                if (instance.StartsWith(processName)) {
+                    using (var procId = new PerformanceCounter("Process", "ID Process", instance, true)) {
+                        if (processId == (int)procId.RawValue) {
+                            name = instance;
+                            break;
+                        }
+                    }
+                }
+            }
+            var cpu = new PerformanceCounter("Process", "% Processor Time", name, true);
+            return cpu;
         }
     }
 }
