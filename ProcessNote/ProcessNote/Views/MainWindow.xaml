@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProcessNote"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Civet Cat - Process Note" Height="450" Width="800">
     <Grid>
         <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}">
             <ListView.View>
@@ -15,42 +15,12 @@
                     <GridViewColumn Header="Threads" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Show Threads"/>
+                                <Button Content="Show Threads" Click="ThreadBtn_Click" CommandParameter="{Binding Threads}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
-        </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding Processes}"
-                 HorizontalContentAlignment="Stretch"
-                 Grid.Row="0">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"
-                                   Text="{Binding Path= ProcessName}" />
-                        <TextBlock Grid.Column="1"
-                                   Text="Binding CPU Usage" />
-                        <Button Grid.Column="2"
-                                Content="Edit"
-                                Click="Button_Click" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-
-
-        </ListBox>-->
-
     </Grid>
 </Window>

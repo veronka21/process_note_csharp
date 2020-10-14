@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using ProcessNote.Views;
 
 namespace ProcessNote
 {
@@ -32,9 +34,11 @@ namespace ProcessNote
             lvProc.ItemsSource = _vm.Processes;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
+        private void ThreadBtn_Click(object sender, RoutedEventArgs e) {
+            Button showThreadBtn = (Button)sender;
+            ProcessThreadCollection threads = (ProcessThreadCollection)showThreadBtn.CommandParameter;
+            ThreadWindow threadWindow = new ThreadWindow(threads);
+            threadWindow.Show();
         }
     }
 }
