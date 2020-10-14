@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
+        <DockPanel Margin="10">
+        <TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="txtFilter_TextChanged" />
+        
         <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}">
             <ListView.View>
                 <GridView>
@@ -24,7 +27,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
+        </DockPanel>
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
