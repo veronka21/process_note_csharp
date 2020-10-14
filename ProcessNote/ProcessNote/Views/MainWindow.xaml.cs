@@ -65,7 +65,7 @@ namespace ProcessNote
                 return ((item as Proc).ProcessName.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
-        private void txtFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void TxtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(lvProc.ItemsSource).Refresh();
         }

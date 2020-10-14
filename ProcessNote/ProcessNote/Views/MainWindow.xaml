@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <DockPanel Margin="10">
-        <TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="txtFilter_TextChanged" />
-        
-        <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}">
+        <DockPanel Margin="10" >
+            <TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="TxtFilter_TextChanged"/>
+            <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}"
+                      SelectedItem="{Binding SelectedProcess}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="200"   DisplayMemberBinding="{Binding ProcessID}">
@@ -27,35 +27,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <StackPanel HorizontalAlignment="Left"
+                    Orientation="Horizontal" Margin="0,-0.2,0,0" Width="263">
+            <TextBlock Text="Current Process:"
+                       Margin="5" />
+            <TextBlock Text="{Binding SelectedProcess.ProcessName}"
+                       Margin="5,0,5,-0.2" Width="160" />
+        </StackPanel>
         </DockPanel>
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
-        </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding Processes}"
-                 HorizontalContentAlignment="Stretch"
-                 Grid.Row="0">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"
-                                   Text="{Binding Path= ProcessName}" />
-                        <TextBlock Grid.Column="1"
-                                   Text="Binding CPU Usage" />
-                        <Button Grid.Column="2"
-                                Content="Edit"
-                                Click="Button_Click" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-
-
-        </ListBox>-->
 
     </Grid>
 </Window>

@@ -30,8 +30,5 @@ namespace ProcessNote.Models
             get { return _processID; }
             set { _processID = value; }
         }
-
-
-
     }
 }
