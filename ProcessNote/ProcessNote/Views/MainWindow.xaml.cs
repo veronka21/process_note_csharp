@@ -1,6 +1,7 @@
 ﻿using ProcessNote.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -34,7 +35,21 @@ namespace ProcessNote
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+        }
 
+        private void ProcessName_Click(object sender, RoutedEventArgs e)
+        {
+            //_vm.Sort();
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("ProcessName", ListSortDirection.Ascending));
+            
+        }
+
+        private void ProcessId_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("ProcessID", ListSortDirection.Ascending));
         }
     }
 }
