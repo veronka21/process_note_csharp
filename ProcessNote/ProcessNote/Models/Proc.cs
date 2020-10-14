@@ -23,6 +23,11 @@ namespace ProcessNote.Models
             }
         }
 
+        public float CPU_Performance
+        {
+            get => (float)CPU_Counter?.NextValue();
+        }
+
         public int? ThreadCount
             {
                 get =>Threads.Count;
