@@ -1,6 +1,8 @@
-﻿using ProcessNote.ViewModels;
+﻿using ProcessNote.Models;
+using ProcessNote.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -32,13 +34,46 @@ namespace ProcessNote
             _vm = new MainWindowViewModel();
             this.DataContext = _vm;
             lvProc.ItemsSource = _vm.Processes;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
+            view.Filter = UserFilter;
         }
 
-        private void ThreadBtn_Click(object sender, RoutedEventArgs e) {
+        private void ThreadBtn_Click(object sender, RoutedEventArgs e) 
+        {
             Button showThreadBtn = (Button)sender;
             ProcessThreadCollection threads = (ProcessThreadCollection)showThreadBtn.CommandParameter;
             ThreadWindow threadWindow = new ThreadWindow(threads);
             threadWindow.Show();
+        }
+
+        private void ProcessName_Click(object sender, RoutedEventArgs e)
+        {
+            //_vm.Sort();
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("ProcessName", ListSortDirection.Ascending));
+            
+        }
+
+        private void ProcessId_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("ProcessID", ListSortDirection.Ascending));
+        }
+
+
+        private bool UserFilter(object item)
+        {
+            if (String.IsNullOrEmpty(txtFilter.Text))
+                return true;
+            else
+                return ((item as Proc).ProcessName.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private void txtFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvProc.ItemsSource).Refresh();
         }
     }
 }

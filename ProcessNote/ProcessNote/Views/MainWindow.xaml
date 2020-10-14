@@ -7,13 +7,24 @@
         mc:Ignorable="d"
         Title="Civet Cat - Process Note" Height="450" Width="800">
     <Grid>
+        <DockPanel Margin="10">
+        <TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="txtFilter_TextChanged" />
+        
         <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding ProcessName}" />
-                    <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding ProcessID}" />
+                    <GridViewColumn Width="200"   DisplayMemberBinding="{Binding ProcessID}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Id" Click="ProcessId_Click">Id</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="200"   DisplayMemberBinding="{Binding ProcessName}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Name" Click="ProcessName_Click">Name</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
                     <GridViewColumn Header="Threads" Width="100">
-                        <GridViewColumn.CellTemplate>
+                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Show Threads" Click="ThreadBtn_Click" CommandParameter="{Binding Threads}" />
                             </DataTemplate>
@@ -22,5 +33,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        </DockPanel>
     </Grid>
 </Window>

@@ -12,7 +12,9 @@ namespace ProcessNote.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        internal ObservableCollection<Proc> Processes { get; set; } = new ObservableCollection<Proc>();
+        internal ObservableCollection<Proc> Processes { get; set ; } = new ObservableCollection<Proc>();
+
+        
         Proc SelectedProcess { get; set; }
 
         public MainWindowViewModel() 
@@ -20,7 +22,7 @@ namespace ProcessNote.ViewModels
             Seed();
         }
 
-        private void Seed()
+        public void Seed()
         {
             Process[] processCollection = Process.GetProcesses();
             foreach (Process p in processCollection)
@@ -34,5 +36,8 @@ namespace ProcessNote.ViewModels
                 Processes.Add(currentProcess);
             }
         }
+
+
+
     }
 }
