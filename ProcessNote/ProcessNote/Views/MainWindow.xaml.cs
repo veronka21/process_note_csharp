@@ -32,6 +32,7 @@ namespace ProcessNote
             _vm = new MainWindowViewModel();
             this.DataContext = _vm;
             lvProc.ItemsSource = _vm.Processes;
+            lvSelectedProc.ItemsSource = _vm.SelectedProcessObservable;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
             view.Filter = UserFilter;
