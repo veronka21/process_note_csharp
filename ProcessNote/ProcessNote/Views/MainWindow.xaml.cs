@@ -50,11 +50,8 @@ namespace ProcessNote
 
         private void ProcessName_Click(object sender, RoutedEventArgs e)
         {
-            //_vm.Sort();
-
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
             view.SortDescriptions.Add(new SortDescription("ProcessName", ListSortDirection.Ascending));
-            
         }
 
         private void ProcessId_Click(object sender, RoutedEventArgs e)
@@ -85,7 +82,6 @@ namespace ProcessNote
             {
                 item.setRunTime();
                 _vm.SelectedProcessObservable.Add(item);
-                Console.WriteLine("asdasd");
             }
         }
 
