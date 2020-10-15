@@ -85,24 +85,39 @@ namespace ProcessNote
             {
                 item.setRunTime();
                 _vm.SelectedProcessObservable.Add(item);
-                Show_TextBox();
+                this.TextStackPanel.Children.Clear();
+                Show_AddButton();
             }
         }
 
-        private void Show_TextBox()
+        private void Show_AddButton()
         {
-            if (this.TextStackPanel.Children.Count==0)
-            {
-                TextBox dynamicTextBox = new TextBox();
-                dynamicTextBox.Name = "DynamicTextBox";
-                dynamicTextBox.Text = "Put your comments here ...";
-                dynamicTextBox.Width = 230;
-                //dynamicTextBox.TextChanged = "TextBox_TextChanged";
-                Thickness margin = dynamicTextBox.Margin;
-                margin.Left = 10;
-                dynamicTextBox.Margin = margin;
-                this.TextStackPanel.Children.Add(dynamicTextBox);
-            }
+
+            //< Button Content = "Show Threads" Click = "ThreadBtn_Click" CommandParameter = "{Binding Threads}" />
+            Button addCommentButton = new Button();
+            addCommentButton.Name = "addComment";
+            addCommentButton.Content = "Add Comment";
+            addCommentButton.Height = 20;
+            Thickness margin = addCommentButton.Margin;
+            margin.Left = 10;
+            addCommentButton.Margin = margin;
+            addCommentButton.Click += Show_TextBox;
+            //addCommentButton.CommandParameter = "{Binding Threads}";
+            this.TextStackPanel.Children.Add(addCommentButton);
+        }
+
+        private void Show_TextBox(object sender, RoutedEventArgs e)
+        {
+            TextBox dynamicTextBox = new TextBox();
+            dynamicTextBox.Name = "DynamicTextBox";
+            dynamicTextBox.Text = "Put your comments here ...";
+            dynamicTextBox.Width = 230;
+            //dynamicTextBox.TextChanged = "TextBox_TextChanged";
+            Thickness margin = dynamicTextBox.Margin;
+            margin.Left = 10;
+            dynamicTextBox.Margin = margin;
+            this.TextStackPanel.Children.Clear();
+            this.TextStackPanel.Children.Add(dynamicTextBox);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
