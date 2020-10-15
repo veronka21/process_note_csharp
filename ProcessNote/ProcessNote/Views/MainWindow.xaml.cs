@@ -34,6 +34,7 @@ namespace ProcessNote
             _vm = new MainWindowViewModel();
             this.DataContext = _vm;
             lvProc.ItemsSource = _vm.Processes;
+            lvSelectedProc.ItemsSource = _vm.SelectedProcessObservable;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
             view.Filter = UserFilter;
@@ -71,9 +72,21 @@ namespace ProcessNote
                 return ((item as Proc).ProcessName.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
-        private void txtFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void TxtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(lvProc.ItemsSource).Refresh();
+        }
+
+        private void ListBox_SelectedProcessChange(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox lb = sender as ListBox;
+            _vm.SelectedProcessObservable.Clear();
+            foreach (Proc item in lb.SelectedItems)
+            {
+                item.setRunTime();
+                _vm.SelectedProcessObservable.Add(item);
+                Console.WriteLine("asdasd");
+            }
         }
     }
 }

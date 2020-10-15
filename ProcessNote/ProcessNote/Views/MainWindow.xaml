@@ -7,32 +7,75 @@
         mc:Ignorable="d"
         Title="Civet Cat - Process Note" Height="450" Width="800">
     <Grid>
-        <DockPanel Margin="10">
-        <TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="txtFilter_TextChanged" />
-        
-        <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="200"   DisplayMemberBinding="{Binding ProcessID}">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Id" Click="ProcessId_Click">Id</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="200"   DisplayMemberBinding="{Binding ProcessName}">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="Name" Click="ProcessName_Click">Name</GridViewColumnHeader>
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Threads" Width="100">
+        <DockPanel Margin="10" >
+            <TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="TxtFilter_TextChanged"/>
+            <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}"
+                      SelectedItem="{Binding SelectedProcessObservable}"
+                      SelectionChanged="ListBox_SelectedProcessChange">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="200"   DisplayMemberBinding="{Binding ProcessID}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Id" Click="ProcessId_Click">Id</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200"   DisplayMemberBinding="{Binding ProcessName}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Name" Click="ProcessName_Click" Width="206">Name</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Threads" Width="100">
                          <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Show Threads" Click="ThreadBtn_Click" CommandParameter="{Binding Threads}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel 
+            HorizontalAlignment="Left"
+                    Orientation="Horizontal" Width="364">
+                <TextBlock Text=""
+                       Margin="5" Width="16" />
+                <ListView x:Name="lvSelectedProc" ItemsSource="{Binding SelectedProcessObservable}"
+                      SelectedItem="{Binding SelectedProcessObservable}"
+                      SelectionChanged="ListBox_SelectedProcessChange" Width="299" Margin="0,0,0,215" Height="147" VerticalAlignment="Bottom">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Selected Process" Width="295">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>
+                                                    <Run Text="Name: "></Run>
+                                                    <Run Text="{Binding ProcessName}"></Run>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>
+                                                    <Run Text="Start time: "></Run>
+                                                    <Run Text="{Binding StartTime}"></Run>
+                                                </TextBlock>
+                                            </StackPanel> 
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>
+                                                    <Run Text="Run time: "></Run>
+                                                    <Run Text="{Binding RunTimeString}"></Run>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <!--<TextBlock Text="{Binding SelectedProcessObservable.ProcessName}"
+                       Margin="5,0,5,-0.2" Width="160" />-->
+            </StackPanel>
         </DockPanel>
     </Grid>
 </Window>
