@@ -50,7 +50,6 @@ namespace ProcessNote
 
         private void ProcessName_Click(object sender, RoutedEventArgs e)
         {
-            //_vm.Sort();
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
             view.SortDescriptions.Add(new SortDescription("ProcessName", ListSortDirection.Ascending));
@@ -95,7 +94,6 @@ namespace ProcessNote
         private void Show_AddButton()
         {
 
-            //< Button Content = "Show Threads" Click = "ThreadBtn_Click" CommandParameter = "{Binding Threads}" />
             Button addCommentButton = new Button();
             addCommentButton.Name = "addComment";
             addCommentButton.Content = "Add Comment";
@@ -104,7 +102,6 @@ namespace ProcessNote
             margin.Left = 10;
             addCommentButton.Margin = margin;
             addCommentButton.Click += Show_TextBox;
-            //addCommentButton.CommandParameter = "{Binding Threads}";
             this.TextStackPanel.Children.Add(addCommentButton);
         }
 
@@ -114,7 +111,14 @@ namespace ProcessNote
            TextBox textBox = (TextBox)this.TextStackPanel.Children[0];
            string comment = textBox.Text;
            _vm.SelectedProcessObservable[0].ProcessComments.Add(comment);
-           Console.WriteLine(_vm.SelectedProcessObservable[0].ProcessComments);
+           textBox.Text = "Your comment has been saved!\nYou can give another one here ...";
+        }
+
+        private void hide_TextBox(object sender, RoutedEventArgs e)
+        {
+            this.TextStackPanel.Children.Clear();
+            this.CommentButtons.Children.Clear();
+            Show_AddButton();
         }
 
         private void Show_TextBox(object sender, RoutedEventArgs e)
@@ -123,7 +127,6 @@ namespace ProcessNote
             dynamicTextBox.Name = "DynamicTextBox";
             dynamicTextBox.Text = "Put your comments here ...";
             dynamicTextBox.Width = 230;
-            //dynamicTextBox.TextChanged = "TextBox_TextChanged";
             Thickness margin = dynamicTextBox.Margin;
             margin.Left = 10;
             dynamicTextBox.Margin = margin;
@@ -138,7 +141,6 @@ namespace ProcessNote
             saveButtonMargin.Left = 10;
             saveCommentButton.Margin = margin;
             saveCommentButton.Click += SaveComment;
-            //addCommentButton.CommandParameter = "{Binding Threads}";
 
             Button cancelCommentButton = new Button();
             cancelCommentButton.Name = "cancelComment";
@@ -147,17 +149,12 @@ namespace ProcessNote
             Thickness commentButtonMargin = saveCommentButton.Margin;
             commentButtonMargin.Left = 10;
             cancelCommentButton.Margin = margin;
-            //saveCommentButton.Click += Show_TextBox;
-            //addCommentButton.CommandParameter = "{Binding Threads}";
+            cancelCommentButton.Click += hide_TextBox;
 
             this.CommentButtons.Children.Clear();
             this.CommentButtons.Children.Add(saveCommentButton);
             this.CommentButtons.Children.Add(cancelCommentButton);
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }
