@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace ProcessNote.Models
 {
-    public class Proc {
+    public class Proc
+    {
         private string _processName;
         private int _processID;
         public List<String> ProcessComments { get; } = new List<string>();
+        private PerformanceCounter _CPU_Usage;
+        private PerformanceCounter _RAM_Usage;
         public ProcessThreadCollection Threads { get; set; }
         public DateTime? StartTime { get; set; }
         public TimeSpan RunTime { get; set; }
@@ -18,20 +21,52 @@ namespace ProcessNote.Models
         public string previousComments { get; set; }
         
         public void setRunTime() 
+        public PerformanceCounter CPU_Usage
         {
-            if (StartTime != null) {
+            get
+            {
+                return _CPU_Usage;
+            }
+            set
+            {
+                _CPU_Usage = value;
+                RefreshCPU_Usage();
+            }
+        }
+        public PerformanceCounter RAM_Usage
+        {
+            get
+            {
+                return _RAM_Usage;
+            }
+            set
+            {
+                _RAM_Usage = value;
+                RefreshRAM_Usage();
+            }
+        }
+        public float CPU_Performance { get; set; }
+        public float RAM_Performance { get; set; }
+
+
+        public void setRunTime()
+        {
+            if (StartTime != null)
+            {
                 RunTime = DateTime.Now.Subtract((DateTime)StartTime);
                 RunTimeString = RunTime.ToString(@"hh\:mm\:ss");
-            } else if (StartTime == null) {
+            }
+            else if (StartTime == null)
+            {
                 RunTimeString = "N/A";
             }
         }
 
         public int? ThreadCount
-            {
-                get =>Threads.Count;
-            }
-        
+        {
+            get => Threads.Count;
+        }
+
 
         public string ProcessName
         {
@@ -59,6 +94,28 @@ namespace ProcessNote.Models
                 comments.Append("\n");
             }
             previousComments += comments.ToString();
+
+        public void RefreshCPU_Usage()
+        {
+            try
+            {
+                CPU_Performance = (float)CPU_Usage?.NextValue();
+            }
+            catch(Exception _)
+            {
+                CPU_Performance = 0;
+            }
+        }
+        public void RefreshRAM_Usage()
+        {
+            try
+            {
+                RAM_Performance = (float)RAM_Usage?.NextValue();
+            }
+            catch (Exception _) 
+            {
+                RAM_Performance = 0;
+            }
         }
     }
 }

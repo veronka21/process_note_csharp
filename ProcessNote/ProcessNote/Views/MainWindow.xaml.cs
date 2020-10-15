@@ -53,7 +53,6 @@ namespace ProcessNote
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
             view.SortDescriptions.Add(new SortDescription("ProcessName", ListSortDirection.Ascending));
-            
         }
 
         private void ProcessId_Click(object sender, RoutedEventArgs e)
@@ -161,5 +160,15 @@ namespace ProcessNote
             this.CommentButtons.Children.Add(cancelCommentButton);
         }
 
+        private void Refresh_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _vm.SelectedProcessObservable.Clear();
+            ListBox lb = sender as ListBox;
+            Proc p = (Proc)lb.SelectedItem;
+            Console.WriteLine(p.ProcessName);
+            p.RefreshCPU_Usage();
+            p.RefreshRAM_Usage();
+            _vm.SelectedProcessObservable.Add(p);
+        }
     }
 }

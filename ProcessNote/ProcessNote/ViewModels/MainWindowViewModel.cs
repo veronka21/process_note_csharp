@@ -18,7 +18,9 @@ namespace ProcessNote.ViewModels
         public ObservableCollection<Proc> SelectedProcessObservable
         {
             get { return _selectedProcessObservable; }
-            set { _selectedProcessObservable = value;
+            set
+            {
+                _selectedProcessObservable = value;
                 OnPropertyChanged("SelectedProcessObservable");
             }
         }
@@ -27,7 +29,7 @@ namespace ProcessNote.ViewModels
         public Proc SelectedProcess { get; set; }
 
 
-        public MainWindowViewModel() 
+        public MainWindowViewModel()
         {
             Seed();
             SelectedProcessObservable = new ObservableCollection<Proc>();
@@ -39,13 +41,32 @@ namespace ProcessNote.ViewModels
             foreach (Process p in processCollection)
             {
                 Proc currentProcess = new Proc() { ProcessName = p.ProcessName, ProcessID = p.Id, Threads = p.Threads };
-                try {
+                try
+                {
                     currentProcess.StartTime = p.StartTime;
-                } catch (Exception) {
-                    
+                    currentProcess.CPU_Usage = GetCPU_Counter(p);
+                    currentProcess.RAM_Usage = GetRAM_Counter(p);
+                }
+                catch (Exception)
+                {
+
                 }
                 Processes.Add(currentProcess);
             }
+        }
+
+        private PerformanceCounter GetCPU_Counter(Process p)
+        {
+            var cpu = new PerformanceCounter("Process", "% Processor Time", p.ProcessName, true);
+            cpu.NextValue();
+            return cpu;
+        }
+
+        private PerformanceCounter GetRAM_Counter(Process p)
+        {
+            var ram = new PerformanceCounter { CategoryName = "Process", CounterName = "Working Set - Private", InstanceName = p.ProcessName };
+            ram.NextValue();
+            return ram;
         }
     }
 }
