@@ -50,6 +50,7 @@ namespace ProcessNote
 
         private void ProcessName_Click(object sender, RoutedEventArgs e)
         {
+
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProc.ItemsSource);
             view.SortDescriptions.Add(new SortDescription("ProcessName", ListSortDirection.Ascending));
         }
@@ -81,8 +82,82 @@ namespace ProcessNote
             foreach (Proc item in lb.SelectedItems)
             {
                 item.setRunTime();
+                item.setPreviousCommentsAsString();
                 _vm.SelectedProcessObservable.Add(item);
+                this.TextStackPanel.Children.Clear();
+                this.CommentButtons.Children.Clear();
+                Show_AddButton();
             }
+        }
+
+
+        private void Show_AddButton()
+        {
+
+            Button addCommentButton = new Button();
+            addCommentButton.Name = "addComment";
+            addCommentButton.Content = "Add Comment";
+            addCommentButton.Height = 20;
+            Thickness margin = addCommentButton.Margin;
+            margin.Left = 10;
+            addCommentButton.Margin = margin;
+            addCommentButton.Click += Show_TextBox;
+            this.TextStackPanel.Children.Add(addCommentButton);
+        }
+
+
+        private void SaveComment(object sender, RoutedEventArgs e)
+        {
+           TextBox textBox = (TextBox)this.TextStackPanel.Children[0];
+           string comment = textBox.Text;
+           _vm.SelectedProcessObservable[0].ProcessComments.Add(comment);
+            _vm.SelectedProcessObservable[0].setPreviousCommentsAsString();
+            Proc item = _vm.SelectedProcessObservable[0];
+            _vm.SelectedProcessObservable.Clear();
+            _vm.SelectedProcessObservable.Add(item);
+            textBox.Text = "Your comment has been saved!\nYou can give another one here ...";
+        }
+
+        private void hide_TextBox(object sender, RoutedEventArgs e)
+        {
+            this.TextStackPanel.Children.Clear();
+            this.CommentButtons.Children.Clear();
+            Show_AddButton();
+        }
+
+        private void Show_TextBox(object sender, RoutedEventArgs e)
+        {
+            TextBox dynamicTextBox = new TextBox();
+            dynamicTextBox.Name = "DynamicTextBox";
+            dynamicTextBox.Text = "Put your comments here ...";
+            dynamicTextBox.Width = 230;
+            Thickness margin = dynamicTextBox.Margin;
+            margin.Left = 10;
+            dynamicTextBox.Margin = margin;
+            this.TextStackPanel.Children.Clear();
+            this.TextStackPanel.Children.Add(dynamicTextBox);
+
+            Button saveCommentButton = new Button();
+            saveCommentButton.Name = "saveComment";
+            saveCommentButton.Content = "Save";
+            saveCommentButton.Height = 20;
+            Thickness saveButtonMargin = saveCommentButton.Margin;
+            saveButtonMargin.Left = 10;
+            saveCommentButton.Margin = margin;
+            saveCommentButton.Click += SaveComment;
+
+            Button cancelCommentButton = new Button();
+            cancelCommentButton.Name = "cancelComment";
+            cancelCommentButton.Content = "Cancel";
+            cancelCommentButton.Height = 20;
+            Thickness commentButtonMargin = saveCommentButton.Margin;
+            commentButtonMargin.Left = 10;
+            cancelCommentButton.Margin = margin;
+            cancelCommentButton.Click += hide_TextBox;
+
+            this.CommentButtons.Children.Clear();
+            this.CommentButtons.Children.Add(saveCommentButton);
+            this.CommentButtons.Children.Add(cancelCommentButton);
         }
 
         private void Refresh_MouseDoubleClick(object sender, MouseButtonEventArgs e)

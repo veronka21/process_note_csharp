@@ -11,12 +11,16 @@ namespace ProcessNote.Models
     {
         private string _processName;
         private int _processID;
+        public List<String> ProcessComments { get; } = new List<string>();
         private PerformanceCounter _CPU_Usage;
         private PerformanceCounter _RAM_Usage;
         public ProcessThreadCollection Threads { get; set; }
         public DateTime? StartTime { get; set; }
         public TimeSpan RunTime { get; set; }
         public string RunTimeString { get; set; }
+        public string previousComments { get; set; }
+        
+        public void setRunTime() 
         public PerformanceCounter CPU_Usage
         {
             get
@@ -76,6 +80,20 @@ namespace ProcessNote.Models
             get { return _processID; }
             set { _processID = value; }
         }
+
+        public void setPreviousCommentsAsString() 
+         {
+            if (ProcessComments.Count == 0) {
+                previousComments = "There are no comments yet.";
+                return;
+            }
+            previousComments = string.Empty;
+            StringBuilder comments = new StringBuilder();
+            foreach (var comment in ProcessComments) {
+                comments.Append(comment);
+                comments.Append("\n");
+            }
+            previousComments += comments.ToString();
 
         public void RefreshCPU_Usage()
         {
