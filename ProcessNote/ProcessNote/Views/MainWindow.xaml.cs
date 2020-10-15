@@ -112,7 +112,11 @@ namespace ProcessNote
            TextBox textBox = (TextBox)this.TextStackPanel.Children[0];
            string comment = textBox.Text;
            _vm.SelectedProcessObservable[0].ProcessComments.Add(comment);
-           textBox.Text = "Your comment has been saved!\nYou can give another one here ...";
+            _vm.SelectedProcessObservable[0].setPreviousCommentsAsString();
+            Proc item = _vm.SelectedProcessObservable[0];
+            _vm.SelectedProcessObservable.Clear();
+            _vm.SelectedProcessObservable.Add(item);
+            textBox.Text = "Your comment has been saved!\nYou can give another one here ...";
         }
 
         private void hide_TextBox(object sender, RoutedEventArgs e)
