@@ -87,6 +87,9 @@
                 <StackPanel Name="TextStackPanel" Orientation="Horizontal" Height="140" Margin="0">
                     <!--<TextBox TextWrapping="Wrap" Text="Put your comments here ..." Width="230" TextChanged="TextBox_TextChanged" Margin="10"/>-->
                 </StackPanel>
+                <StackPanel Name="CommentButtons" Orientation="Horizontal" Height="65" Margin="0">
+                    <!--<TextBox TextWrapping="Wrap" Text="Put your comments here ..." Width="230" TextChanged="TextBox_TextChanged" Margin="10"/>-->
+                </StackPanel>
                 <!--<TextBlock Text="{Binding SelectedProcessObservable.ProcessName}"
                        Margin="5,0,5,-0.2" Width="160" />-->
             </StackPanel>
