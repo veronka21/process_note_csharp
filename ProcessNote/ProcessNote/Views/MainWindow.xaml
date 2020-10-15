@@ -14,8 +14,8 @@
                 </TextBox.Background>
             </TextBox>
             <ListView x:Name="lvProc" ItemsSource="{Binding Path=Processes}"
-                      SelectionChanged="ListBox_SelectedProcessChange">
-                      <!--SelectedItem="{Binding SelectedProcessObservable}"-->
+                      SelectionChanged="ListBox_SelectedProcessChange"
+                      MouseDoubleClick="Refresh_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="200"   DisplayMemberBinding="{Binding ProcessID}">
@@ -29,12 +29,12 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Header="Threads" Width="100">
-                         <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Show Threads" Click="ThreadBtn_Click" CommandParameter="{Binding Threads}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Show Threads" Click="ThreadBtn_Click" CommandParameter="{Binding Threads}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -44,9 +44,7 @@
                 <TextBlock Text=""
                        Margin="5" Width="16" />
                 <ListView x:Name="lvSelectedProc" ItemsSource="{Binding SelectedProcessObservable}"
-                       Width="299" Margin="0,0,0,215" Height="147" VerticalAlignment="Bottom">
-                    <!--SelectionChanged="ListBox_SelectedProcessChange"
-                      SelectedItem="{Binding SelectedProcessObservable}"-->
+                      Width="299" Margin="0,0,0,215" Height="147" VerticalAlignment="Bottom">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Selected Process" Width="295">
@@ -64,11 +62,23 @@
                                                     <Run Text="Start time: "></Run>
                                                     <Run Text="{Binding StartTime}"></Run>
                                                 </TextBlock>
-                                            </StackPanel> 
+                                            </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock>
                                                     <Run Text="Run time: "></Run>
                                                     <Run Text="{Binding RunTimeString}"></Run>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>
+                                                    <Run Text="CPU%: "></Run>
+                                                    <Run Text="{Binding CPU_Performance}"></Run>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>
+                                                    <Run Text="RAM: "></Run>
+                                                    <Run Text="{Binding RAM_Performance}"></Run>
                                                 </TextBlock>
                                             </StackPanel>
                                         </StackPanel>

@@ -84,5 +84,16 @@ namespace ProcessNote
                 _vm.SelectedProcessObservable.Add(item);
             }
         }
+
+        private void Refresh_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _vm.SelectedProcessObservable.Clear();
+            ListBox lb = sender as ListBox;
+            Proc p = (Proc)lb.SelectedItem;
+            Console.WriteLine(p.ProcessName);
+            p.RefreshCPU_Usage();
+            p.RefreshRAM_Usage();
+            _vm.SelectedProcessObservable.Add(p);
+        }
     }
 }
