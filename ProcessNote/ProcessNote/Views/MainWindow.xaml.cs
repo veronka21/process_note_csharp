@@ -86,9 +86,11 @@ namespace ProcessNote
                 item.setRunTime();
                 _vm.SelectedProcessObservable.Add(item);
                 this.TextStackPanel.Children.Clear();
+                this.CommentButtons.Children.Clear();
                 Show_AddButton();
             }
         }
+
 
         private void Show_AddButton()
         {
@@ -106,6 +108,15 @@ namespace ProcessNote
             this.TextStackPanel.Children.Add(addCommentButton);
         }
 
+
+        private void SaveComment(object sender, RoutedEventArgs e)
+        {
+           TextBox textBox = (TextBox)this.TextStackPanel.Children[0];
+           string comment = textBox.Text;
+           _vm.SelectedProcessObservable[0].ProcessComments.Add(comment);
+           Console.WriteLine(_vm.SelectedProcessObservable[0].ProcessComments);
+        }
+
         private void Show_TextBox(object sender, RoutedEventArgs e)
         {
             TextBox dynamicTextBox = new TextBox();
@@ -118,6 +129,30 @@ namespace ProcessNote
             dynamicTextBox.Margin = margin;
             this.TextStackPanel.Children.Clear();
             this.TextStackPanel.Children.Add(dynamicTextBox);
+
+            Button saveCommentButton = new Button();
+            saveCommentButton.Name = "saveComment";
+            saveCommentButton.Content = "Save";
+            saveCommentButton.Height = 20;
+            Thickness saveButtonMargin = saveCommentButton.Margin;
+            saveButtonMargin.Left = 10;
+            saveCommentButton.Margin = margin;
+            saveCommentButton.Click += SaveComment;
+            //addCommentButton.CommandParameter = "{Binding Threads}";
+
+            Button cancelCommentButton = new Button();
+            cancelCommentButton.Name = "cancelComment";
+            cancelCommentButton.Content = "Cancel";
+            cancelCommentButton.Height = 20;
+            Thickness commentButtonMargin = saveCommentButton.Margin;
+            commentButtonMargin.Left = 10;
+            cancelCommentButton.Margin = margin;
+            //saveCommentButton.Click += Show_TextBox;
+            //addCommentButton.CommandParameter = "{Binding Threads}";
+
+            this.CommentButtons.Children.Clear();
+            this.CommentButtons.Children.Add(saveCommentButton);
+            this.CommentButtons.Children.Add(cancelCommentButton);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
