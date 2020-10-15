@@ -84,6 +84,7 @@ namespace ProcessNote
             foreach (Proc item in lb.SelectedItems)
             {
                 item.setRunTime();
+                item.setPreviousCommentsAsString();
                 _vm.SelectedProcessObservable.Add(item);
                 this.TextStackPanel.Children.Clear();
                 Show_AddButton();

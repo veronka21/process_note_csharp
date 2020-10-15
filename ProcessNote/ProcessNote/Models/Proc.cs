@@ -10,11 +10,12 @@ namespace ProcessNote.Models
     public class Proc {
         private string _processName;
         private int _processID;
-        public List<String> ProcessComments { get; } = new List<string>();
+        public List<String> ProcessComments { get; } = new List<string>() { "safsdgf", "dafoaisjdfoidsajgodsa", "fdsajfoijsfdjasoijfajfio", "fdsfds", "dsfsag", "dfdagagagd" };
         public ProcessThreadCollection Threads { get; set; }
         public DateTime? StartTime { get; set; }
         public TimeSpan RunTime { get; set; }
         public string RunTimeString { get; set; }
+        public string previousComments { get; set; }
         
         public void setRunTime() 
         {
@@ -43,6 +44,20 @@ namespace ProcessNote.Models
         {
             get { return _processID; }
             set { _processID = value; }
+        }
+
+        public void setPreviousCommentsAsString() 
+         {
+            if (ProcessComments.Count == 0) {
+                previousComments = "There are no comments yet.";
+                return;
+            }
+            StringBuilder comments = new StringBuilder();
+            foreach (var comment in ProcessComments) {
+                comments.Append(comment);
+                comments.Append("\n");
+            }
+            previousComments += comments.ToString();
         }
     }
 }
