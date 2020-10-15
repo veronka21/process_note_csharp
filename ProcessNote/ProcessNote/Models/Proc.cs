@@ -10,6 +10,7 @@ namespace ProcessNote.Models
     public class Proc {
         private string _processName;
         private int _processID;
+        public List<String> ProcessComments { get; } = new List<string>();
         public ProcessThreadCollection Threads { get; set; }
         public DateTime? StartTime { get; set; }
         public TimeSpan RunTime { get; set; }
