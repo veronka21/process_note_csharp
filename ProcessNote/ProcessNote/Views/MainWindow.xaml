@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProcessNote"
         mc:Ignorable="d"
-        Title="Civet Cat - Process Note" Height="450" Width="800">
+        Title="Civet Cat - Process Note" Height="450" Width="810">
     <Grid>
         <DockPanel Margin="10" >
             <TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="TxtFilter_TextChanged"/>
@@ -25,54 +25,57 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Header="Threads" Width="100">
-                         <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Show Threads" Click="ThreadBtn_Click" CommandParameter="{Binding Threads}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Show Threads" Click="ThreadBtn_Click" CommandParameter="{Binding Threads}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
             <StackPanel 
             HorizontalAlignment="Left"
-                    Orientation="Horizontal" Width="364">
-                <TextBlock Text=""
-                       Margin="5" Width="16" />
-                <ListView x:Name="lvSelectedProc" ItemsSource="{Binding SelectedProcessObservable}"
-                      SelectedItem="{Binding SelectedProcessObservable}"
-                      SelectionChanged="ListBox_SelectedProcessChange" Width="299" Margin="0,0,0,215" Height="147" VerticalAlignment="Bottom">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Selected Process" Width="295">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Vertical">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock>
+                    Orientation="Vertical" Width="247" Margin="0">
+                <StackPanel Orientation="Horizontal" Height="160" Margin="0">
+                    <ListView x:Name="lvSelectedProc" ItemsSource="{Binding SelectedProcessObservable}"
+                          SelectedItem="{Binding SelectedProcessObservable}"
+                          SelectionChanged="ListBox_SelectedProcessChange" Width="230" Margin="10,0,10,10" Height="138" VerticalAlignment="Bottom">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Selected Process" Width="200">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock>
                                                     <Run Text="Name: "></Run>
                                                     <Run Text="{Binding ProcessName}"></Run>
-                                                </TextBlock>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock>
                                                     <Run Text="Start time: "></Run>
                                                     <Run Text="{Binding StartTime}"></Run>
-                                                </TextBlock>
-                                            </StackPanel> 
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock>
                                                     <Run Text="Run time: "></Run>
                                                     <Run Text="{Binding RunTimeString}"></Run>
-                                                </TextBlock>
+                                                    </TextBlock>
+                                                </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+                <StackPanel Name="TextStackPanel" Orientation="Horizontal" Height="140" Margin="0">
+                    <!--<TextBox TextWrapping="Wrap" Text="Put your comments here ..." Width="230" TextChanged="TextBox_TextChanged" Margin="10"/>-->
+                </StackPanel>
                 <!--<TextBlock Text="{Binding SelectedProcessObservable.ProcessName}"
                        Margin="5,0,5,-0.2" Width="160" />-->
             </StackPanel>

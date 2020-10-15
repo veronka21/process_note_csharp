@@ -85,8 +85,29 @@ namespace ProcessNote
             {
                 item.setRunTime();
                 _vm.SelectedProcessObservable.Add(item);
-                Console.WriteLine("asdasd");
+                Show_TextBox();
             }
+        }
+
+        private void Show_TextBox()
+        {
+            if (this.TextStackPanel.Children.Count==0)
+            {
+                TextBox dynamicTextBox = new TextBox();
+                dynamicTextBox.Name = "DynamicTextBox";
+                dynamicTextBox.Text = "Put your comments here ...";
+                dynamicTextBox.Width = 230;
+                //dynamicTextBox.TextChanged = "TextBox_TextChanged";
+                Thickness margin = dynamicTextBox.Margin;
+                margin.Left = 10;
+                dynamicTextBox.Margin = margin;
+                this.TextStackPanel.Children.Add(dynamicTextBox);
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
