@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProcessNote"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Civet Cat - Process Note" Height="450" Width="800">
     <Grid>
         <DockPanel Margin="10" >
             <TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="TxtFilter_TextChanged"/>
@@ -24,7 +24,13 @@
                                 <GridViewColumnHeader Tag="Name" Click="ProcessName_Click" Width="206">Name</GridViewColumnHeader>
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <!--<GridViewColumn Header="start" Width="100" DisplayMemberBinding="{Binding StartTime}" />-->
+                        <GridViewColumn Header="Threads" Width="100">
+                         <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Show Threads" Click="ThreadBtn_Click" CommandParameter="{Binding Threads}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -71,6 +77,5 @@
                        Margin="5,0,5,-0.2" Width="160" />-->
             </StackPanel>
         </DockPanel>
-
     </Grid>
 </Window>
