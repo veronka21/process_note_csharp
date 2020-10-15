@@ -130,7 +130,7 @@ namespace ProcessNote
             TextBox dynamicTextBox = new TextBox();
             dynamicTextBox.Name = "DynamicTextBox";
             dynamicTextBox.Text = "Put your comments here ...";
-            dynamicTextBox.Width = 230;
+            dynamicTextBox.Width = 238;
             Thickness margin = dynamicTextBox.Margin;
             margin.Left = 10;
             dynamicTextBox.Margin = margin;
@@ -168,6 +168,7 @@ namespace ProcessNote
             Console.WriteLine(p.ProcessName);
             p.RefreshCPU_Usage();
             p.RefreshRAM_Usage();
+            p.setRunTime();
             _vm.SelectedProcessObservable.Add(p);
         }
     }

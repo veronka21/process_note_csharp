@@ -40,69 +40,73 @@
             </ListView>
             <StackPanel 
             HorizontalAlignment="Left"
-                    Orientation="Vertical" Width="247" Margin="0">
-                <StackPanel Orientation="Horizontal" Height="160" Margin="0">
-				
-                    <ListView x:Name="lvSelectedProc" ItemsSource="{Binding SelectedProcessObservable}"
-                          SelectedItem="{Binding SelectedProcessObservable}"
-                          Width="230" Margin="10,0,10,10" Height="138" VerticalAlignment="Bottom">
-						        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Selected Process" Width="220">
-                                    <GridViewColumn.CellTemplate>
-                                            
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Vertical">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock>
+                    Orientation="Vertical" Width="348" Margin="0">
+                <StackPanel Orientation="Horizontal" Height="160">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible" Height="138" Width="263">
+                        <Grid>
+                            <ListView x:Name="lvSelectedProc" ItemsSource="{Binding SelectedProcessObservable}" Margin="10,0,0,10" MinHeight="138" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Selected Process" Width="220">
+                                            <GridViewColumn.CellTemplate>
+
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock>
                                                     <Run Text="Name: "></Run>
                                                     <Run Text="{Binding ProcessName}"></Run>
-                                                    </TextBlock>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock>
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock>
                                                     <Run Text="Start time: "></Run>
                                                     <Run Text="{Binding StartTime}"></Run>
-                                                    </TextBlock>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock>
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock>
                                                     <Run Text="Run time: "></Run>
                                                     <Run Text="{Binding RunTimeString}"></Run>
-                                                    </TextBlock>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal">
-                                                  <TextBlock>
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock>
                                                       <Run Text="CPU%: "></Run>
                                                       <Run Text="{Binding CPU_Performance}"></Run>
-                                                  </TextBlock>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock>
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock>
                                                         <Run Text="RAM: "></Run>
                                                         <Run Text="{Binding RAM_Performance}"></Run>
-                                                    </TextBlock>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding previousComments}" MaxWidth="200"
+                                                            </TextBlock>
+                                                            <TextBlock>
+                                                                <LineBreak/>
+                                                            </TextBlock>
+                                                        </StackPanel>
+
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="{Binding previousComments}" MaxWidth="200"
                                                         TextWrapping="Wrap" 
                                                         FontFamily="Consolas"
                                                         FontSize="{Binding FontSize}" >
-                                                    </TextBlock>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                    </ScrollViewer>
                 </StackPanel>
-                <StackPanel Name="TextStackPanel" Orientation="Horizontal" Height="140" Margin="0">
+                <StackPanel Name="TextStackPanel" Orientation="Horizontal" Height="140">
                     <!--<TextBox TextWrapping="Wrap" Text="Put your comments here ..." Width="230" TextChanged="TextBox_TextChanged" Margin="10"/>-->
                 </StackPanel>
-                <StackPanel Name="CommentButtons" Orientation="Horizontal" Height="65" Margin="0">
+                <StackPanel Name="CommentButtons" Orientation="Horizontal" Height="65">
                     <!--<TextBox TextWrapping="Wrap" Text="Put your comments here ..." Width="230" TextChanged="TextBox_TextChanged" Margin="10"/>-->
                 </StackPanel>
             </StackPanel>
